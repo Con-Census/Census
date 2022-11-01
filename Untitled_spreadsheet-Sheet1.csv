@@ -1,0 +1,80 @@
+,,,
+,midyear_population,,
+,country_code,STRING,Federal Information Processing Standard (FIPS) country/area code
+,country_name,STRING,Country or area name
+,year,INTEGER,Year
+,midyear_population,INTEGER,Both sexes midyear population
+,total_population,INTEGER,Total worldwide population
+,,,
+,JSON Data,,
+,,,
+,Column Name,Type,Description
+,repo,OBJECT,Repository name (user/path)
+,language,OBJECT,Coding Language the repository is written in
+,readme_contents,OBJECT,Raw README contents
+,length,INTEGER,Count of all characters in the README
+,clean,OBJECT,"Cleaned and lemmatized words, separated individually into a list"
+,word_count,INTEGER,Count of all word in the README after lemmatizing
+,words,OBJECT,Cleaned and lemmatized words in one string
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,Alabama (AL),"$54,697,779,694",1.33%
+,Alaska (AK),"$13,617,642,444",0.33%
+,Arizona (AZ),"$97,000,340,211",2.36%
+,Arkansas (AR),"$29,378,338,658",0.72%
+,California (CA),"$390,811,907,053",9.52%
+,Colorado (CO),"$53,910,424,226",1.31%
+,Connecticut (CT),"$104,360,084,694",2.54%
+,Delaware (DE),"$9,905,940,162",0.24%
+,District of Columbia (DC),"$48,804,556,621",1.19%
+,Florida (FL),"$239,415,273,788",5.83%
+,Georgia (GA),"$87,940,793,553",2.14%
+,Hawaii (HI),"$15,336,370,543",0.37%
+,Idaho (ID),"$17,000,463,101",0.41%
+,Illinois (IL),"$109,447,513,878",2.67%
+,Indiana (IN),"$151,184,771,548",3.68%
+,Iowa (IA),"$27,234,213,711",0.66%
+,Kansas (KS),"$24,517,979,530",0.60%
+,Kentucky (KY),"$138,950,180,114",3.39%
+,Louisiana (LA),"$50,296,697,335",1.23%
+,Maine (ME),"$16,547,791,797",0.40%
+,Maryland (MD),"$82,222,991,997",2%
+,Massachusetts (MA),"$82,524,913,295",2.01%
+,Michigan (MI),"$103,250,734,470",2.52%
+,Minnesota (MN),"$188,688,505,309",4.60%
+,Mississippi (MS),"$31,111,323,861",0.76%
+,Missouri (MO),"$70,543,808,164",1.72%
+,Montana (MT),"$11,848,810,335",0.29%
+,Nebraska (NE),"$20,626,215,776",0.50%
+,Nevada (NV),"$25,838,824,405",0.63%
+,New Hampshire (NH),"$12,554,714,148",0.31%
+,New Jersey (NJ),"$83,435,714,941",2.03%
+,New Mexico (NM),"$36,059,188,570",0.88%
+,New York (NY),"$250,535,015,898",6.10%
+,North Carolina (NC),"$91,894,678,742",2.24%
+,North Dakota (ND),"$64,025,760,233",1.56%
+,Ohio (OH),"$104,850,118,814",2.55%
+,Oklahoma (OK),"$40,273,480,886",0.98%
+,Oregon (OR),"$46,209,655,723",1.13%
+,Pennsylvania (PA),"$215,415,056,185",5.25%
+,Rhode Island (RI),"$12,990,641,885",0.32%
+,South Carolina (SC),"$105,605,021,111",2.57%
+,South Dakota (SD),"$9,371,047,386",0.23%
+,Tennessee (TN),"$86,810,349,251",2.11%
+,Texas (TX),"$249,333,695,423",6.07%
+,Utah (UT),"$23,215,047,043",0.57%
+,Vermont (VT),"$7,201,295,969",0.18%
+,Virginia (VA),"$137,606,203,585",3.35%
+,Washington (WA),"$71,159,159,520",1.73%
+,West Virginia (WV),"$21,085,771,778",0.51%
+,Wisconsin (WI),"$89,244,251,343",2.17%
+,Wyoming (WY),"$6,448,803,714",0.16%
+,American Samoa (AS),"$503,121,573",0.01%
+,Guam (GU),"$2,548,619,598",0.06%
+,Northern Mariana Islands (MP),"$494,228,437",0.01%
+,Puerto Rico (PR),"$36,929,831,638",0.90%
+,U.S. Virgin Islands (VI),"$1,776,567,277",0.04%
