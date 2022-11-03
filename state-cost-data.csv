@@ -1,5 +1,4 @@
-1980-2022 Billion-Dollar Disasters Cost (in $Millions) By State (CPI-Adjusted)
-state,"drought","flooding","freeze","severe storm","tropical cyclone","wildfire","winter storm"
+state,drought,flooding,freeze,severe storm,tropical cyclone,wildfire,winter storm
 AK,0.0,0.0,0.0,0.0,0.0,2095.0,0.0
 AL,6370.9,127.4,141.0,12394.7,25072.3,678.4,2075.6
 AR,6161.4,4359.1,275.8,7184.8,667.7,0.0,898.8
