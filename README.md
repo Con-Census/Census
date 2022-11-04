@@ -1,5 +1,7 @@
 # Con-census: Climate Risk Assessment 
 
+![Alt text](http://localhost:8888/notebooks/Final%20Notebook.ipynbblob:http://localhost:8888/3a6eeae6-c2b0-4fc2-8b81-186b52ca600e.jpg "Optional title")
+
 ## Project Summary
 
 - The initial data indicated that the New York and California have highest risk in the United States and studies found to back the findings.
