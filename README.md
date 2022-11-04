@@ -1,6 +1,6 @@
 # Con-census: Climate Risk Assessment 
 
-![Alt text](./downloads/newplot.png)
+![Alt text](./newplot.png)
 
 ## Project Summary
 
