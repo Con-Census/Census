@@ -53,17 +53,17 @@ def train_validate_test(df, target):
     train, validate = train_test_split(train_validate, test_size=0.3, random_state=123)
 
     # split train into X (dataframe, drop target) & y (series, keep target only)
-    X_train = train.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'federal_funding', 'drought_loss', 'hurricane_loss',
+    X_train = train.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'funding', 'drought_loss', 'hurricane_loss',
                                   'storm_loss', 'area', 'population', 'support_value'])
     y_train = train[target]
 
     # split validate into X (dataframe, drop target) & y (series, keep target only)
-    X_validate = validate.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'federal_funding', 'drought_loss', 'hurricane_loss',
+    X_validate = validate.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'funding', 'drought_loss', 'hurricane_loss',
                                   'storm_loss','area', 'population', 'support_value'])
     y_validate = validate[target]
 
     # split test into X (dataframe, drop target) & y (series, keep target only)
-    X_test = test.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'federal_funding', 'drought_loss', 'hurricane_loss',
+    X_test = test.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'funding', 'drought_loss', 'hurricane_loss',
                                   'storm_loss', 'area', 'population', 'support_value'])
     y_test = test[target]
 
