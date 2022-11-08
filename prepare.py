@@ -183,6 +183,24 @@ def prepare_fema(df):
          'agrivalue', 'area','risk_score', 'resl_score', 'resl_value','drought_freq', 'drought_score', 'drought_loss', 
          'hurricane_freq','hurricane_score', 'hurricane_loss', 'storm_freq', 'storm_score', 'storm_loss']]
     
+    # Fill NA's as most are areas where a disaster will not strike
+    df=df.fillna(0)
+    
+    df=df.rename(columns={'state':'full_state','stateabbrv':'state'})
+    df.replace('D.C.','DC',inplace=True)
+    
+    # Create population density
+    df['pop_density'] = df.population / df.area
+    
+    # Cost of multiple disasters
+    df['cost']=(df.drought_loss + df.hurricane_loss + df.storm_loss)
+    
+    # How much funding is left over in case of multiple disasters
+    df['support_value'] = (df.state_funding + df.funding) - (df.drought_loss + df.hurricane_loss + df.storm_loss)
+    
+    # Engineer a category for each county on where it falls in reference to "preparedness"
+    df['support_level'] = pd.cut(df.support_value, 4, labels = ['bottom tier', 'below average', 'above average', 'top tier'])
+    
     return df
     
     
