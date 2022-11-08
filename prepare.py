@@ -217,8 +217,13 @@ def prepare_fema(df):
     
     
 def prep_fema(df):
-    # Drop columns for additional ID columns or version info
+    
+    '''Beginning with a dateframe that has 365 columns, removing columns with string ratings, separate values for various
+    things, and adding various columns to determine the deficit an individual county will have if a disaster would occur '''
+    # loweercase column names
     df.columns = df.columns.str.lower()
+    
+    # Drop columns for additional ID columns or version info
     df.drop(columns=['nri_id', 'statefips', 'countytype', 'countyfips', 'buildvalue', 'agrivalue',
                      'nri_ver', 'oid_'], inplace=True)
     
@@ -355,6 +360,7 @@ def prep_fema(df):
     # Fill NA's as most are areas where certain disasters will not strike
     df=df.fillna(0)
     
+    # Rename
     df=df.rename(columns={'state':'full_state','stateabbrv':'state'})
     df.replace('D.C.','DC',inplace=True)
     
@@ -365,6 +371,7 @@ def prep_fema(df):
     # Engineer a category for each county on where it falls in reference to "preparedness"
     df['support_level'] = pd.cut(df.deficit, 4, labels = ['bottom tier', 'below average', 'above average', 'top tier'])
     
+    # Change column order
     df = df[['full_state', 'state', 'county', 'population','statepop', 'area', 'pop_density','funding',
        'revenue_per_person', 'state_funding', 'state_amount', 'risk_score',
        'avln_afreq', 'avln_ealt', 'avln_risks', 'cfld_afreq', 'cfld_ealt',
