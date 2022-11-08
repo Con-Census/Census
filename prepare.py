@@ -142,7 +142,7 @@ def prepare_fema(df):
               'ND','OH','OK','OR','PA','RI','SC', 'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
     
     # Create a columm that'll help with joining the two dataframes
-    state_funding['stateabbrv'] = states
+    state_funding['state'] = states
     
     # Drop $ and , to convert column type
     state_funding.funding = state_funding.funding.str.replace('$','', regex=True).replace(',','', regex=True)
@@ -151,7 +151,7 @@ def prepare_fema(df):
     state_funding.funding = state_funding.funding.astype(int)
     
     # Join dataframes
-    df = df.merge(state_funding[['stateabbrv','funding']], how='right', on='stateabbrv')
+    df = df.merge(state_funding[['state','funding']], how='right', on='state')
     
     # State Revenue per person, narrow df down to states, dropping regions, and changing column type to integer
     sr = pd.read_csv('state_revenue.csv')
