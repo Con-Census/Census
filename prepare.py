@@ -31,8 +31,8 @@ def get_fema_data():
 
 def prepare_fema(df):
     # Drop columns for additional ID columns or version info
-    df.drop(columns=['nri_id', 'statefips', 'countytype', 'countyfips',
-                     'nri_ver', 'stcofips', 'oid_'], inplace=True)
+    df.drop(columns={'nri_id', 'statefips', 'countytype', 'countyfips',
+                     'nri_ver', 'stcofips', 'oid_'}, inplace=True)
     
     '''We chose the 3 most costly disasters and removed the others. 
     We combined lighnting and strong wind to represent a severe storm'''
