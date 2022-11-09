@@ -38,11 +38,42 @@ ___
 
 ***
 ## Data Dictionary
-<img width="334" alt="Screen Shot 2022-11-09 at 2 02 58 PM" src="https://user-images.githubusercontent.com/98612085/200929817-db0d31fe-64f9-4017-aa34-51f9ecd9c26f.png">
+
+|full_state  |State Name|
+|state   |State Abbreviation|
+|county  |County Name|
+|stcofips  |FIPS Location Data|
+|population    |County Population|
+|area   |Area (sq mi)|
+|pop_density   |Population Density|
+|fema_per_county   |FEMA funding per county|
+|risk_score       |National Risk Index - Score - Composite|
+|avln_ealt   |Avalanche - Estimated Annual Total Loss|
+|cfld_ealt   |Coastal Flooding - Estimated Annual Total Loss|
+|cwav_ealt   |Cold Wave - Estimated Annual Total Loss|
+|drgt_ealt   |Drought - Estimated Annual Total Loss|
+|erqk_ealt   |Earthquake - Estimated Annual Total Loss|
+|hail_ealt   |Hail - Estimated Annual Total Loss|
+|hwav_ealt   |Heat Wave - Estimated Annual Total Loss|
+|hrcn_ealt   |Hurricane - Estimated Annual Total Loss|
+|istm_ealt   |Ice Storm - Estimated Annual Total Loss|
+|lnds_ealt   |Landslide - Estimated Annual Total Loss|
+|ltng_ealt   |Lightning - Estimated Annual Total Loss|
+|rfld_ealt   |Riverine Flooding - Estimated Annual Total Loss|
+|swnd_ealt   |Strong Wind - Estimated Annual Total Loss|
+|trnd_ealt   |Tornado - Estimated Annual Total Loss|
+|tsun_ealt   |Tsunami - Estimated Annual Total Loss|
+|vlcn_ealt   |Volcanic Activity - Estimated Annual Total Loss|
+|wfir_ealt   |Wildfire - Estimated Annual Total Loss|
+|wntw_ealt   |Winter Storm - Estimated Annual Total Loss|
+|max_cost | Disaster that causes most monetary damage in county
+|county_funding |Funding collected through taxes|
+|deficit |Money left over following most expensive disaster
+|support level  |what is the level of the support that the government rendered|
 
 
 ***
-## Panning
+## Planning
 - We create README.md file
 - Create wrangle.py file
     - wrangle.py will clean the datasets from various website
