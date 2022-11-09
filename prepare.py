@@ -272,8 +272,12 @@ def prep_fema(df):
     df = df[df.columns.drop(list(df.filter(regex='spctl')))]
     # Expected Annual Loss
     df = df[df.columns.drop(list(df.filter(regex='eal_')))]
-    # Events are recorded over varyiong periods, so we'll only keep frequency
+    # Events are recorded over varyiong periods
     df = df[df.columns.drop(list(df.filter(regex='evnts')))]
+    # Frequency
+    df = df[df.columns.drop(list(df.filter(regex='afreq')))]
+    # Risk score
+    df = df[df.columns.drop(list(df.filter(regex='risk')))]
     
     # Sort alphabetically by state
     df = df.sort_values(by=['state','county'])
@@ -379,15 +383,11 @@ def prep_fema(df):
     df['support_level'] = pd.cut(df.deficit, 4, labels = ['bottom tier', 'below average', 'above average', 'top tier'])
     
     # Change column order
-    df = df[['full_state', 'state', 'county', 'population', 'statepop', 'area', 'pop_density', 'funding', 'revenue_per_person', 
-             'state_funding', 'state_amount', 'risk_score', 'avln_afreq', 'avln_ealt', 'avln_risks', 'cfld_afreq', 'cfld_ealt',
-             'cfld_risks', 'cwav_afreq', 'cwav_ealt', 'cwav_risks', 'drgt_afreq', 'drgt_ealt', 'drgt_risks', 'erqk_afreq',
-             'erqk_ealt', 'erqk_risks', 'hail_afreq', 'hail_ealt', 'hail_risks', 'hwav_afreq', 'hwav_ealt', 'hwav_risks',
-             'hrcn_afreq', 'hrcn_ealt', 'hrcn_risks', 'istm_afreq', 'istm_ealt', 'istm_risks', 'lnds_afreq', 'lnds_ealt',
-             'lnds_risks', 'ltng_afreq', 'ltng_ealt', 'ltng_risks', 'rfld_afreq', 'rfld_ealt', 'rfld_risks', 'swnd_afreq',
-             'swnd_ealt', 'swnd_risks', 'trnd_afreq', 'trnd_ealt', 'trnd_risks', 'tsun_afreq', 'tsun_ealt', 'tsun_risks',
-             'vlcn_afreq', 'vlcn_ealt', 'vlcn_risks', 'wfir_afreq', 'wfir_ealt', 'wfir_risks', 'wntw_afreq', 'wntw_ealt',
-             'wntw_risks', 'max_cost', 'county_funding', 'deficit', 'support_level']]
+    df = df[['full_state', 'state', 'county', 'stcofips', 'population', 'statepop', 'area', 'pop_density', 'funding',
+             'revenue_per_person', 'state_funding', 'state_amount', 'avln_ealt', 'cfld_ealt', 'cwav_ealt', 'drgt_ealt',
+             'erqk_ealt', 'hail_ealt', 'hwav_ealt', 'hrcn_ealt', 'istm_ealt', 'lnds_ealt','ltng_ealt', 'rfld_ealt',
+             'swnd_ealt', 'trnd_ealt', 'tsun_ealt',  'vlcn_ealt', 'wfir_ealt', 'wntw_ealt', 'max_cost', 
+             'county_funding', 'deficit', 'support_level']]
     
     return df    
     
