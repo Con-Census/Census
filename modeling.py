@@ -58,7 +58,7 @@ def train_validate_test(df, target):
                                   'state_amount', 'avln_ealt', 'cfld_ealt','cwav_ealt', 'drgt_ealt',\
                                   'erqk_ealt', 'hail_ealt', 'hwav_ealt', 'hrcn_ealt', 'istm_ealt',\
                                   'lnds_ealt', 'ltng_ealt','rfld_ealt', 'swnd_ealt', 'trnd_ealt',\
-                                  'tsun_ealt', 'vlcn_ealt', 'wfir_ealt', 'wntw_ealt',])
+                                  'tsun_ealt', 'vlcn_ealt', 'wfir_ealt', 'wntw_ealt', 'risk_score'])
     y_train = train[target]
 
     # split validate into X (dataframe, drop target) & y (series, keep target only)
@@ -67,16 +67,16 @@ def train_validate_test(df, target):
                                   'state_amount', 'avln_ealt', 'cfld_ealt','cwav_ealt', 'drgt_ealt',\
                                   'erqk_ealt', 'hail_ealt', 'hwav_ealt', 'hrcn_ealt', 'istm_ealt',\
                                   'lnds_ealt', 'ltng_ealt','rfld_ealt', 'swnd_ealt', 'trnd_ealt',\
-                                  'tsun_ealt', 'vlcn_ealt', 'wfir_ealt', 'wntw_ealt',])
+                                  'tsun_ealt', 'vlcn_ealt', 'wfir_ealt', 'wntw_ealt','risk_score'])
     y_validate = validate[target]
 
     # split test into X (dataframe, drop target) & y (series, keep target only)
-    X_test = test.drop(columns=[target,   'full_state', 'state', 'county', 'population','statepop',\
+    X_test = test.drop(columns=[target,  'full_state', 'state', 'county', 'population','statepop',\
                                   'area', 'funding', 'revenue_per_person', 'state_funding',\
                                   'state_amount', 'avln_ealt', 'cfld_ealt','cwav_ealt', 'drgt_ealt',\
                                   'erqk_ealt', 'hail_ealt', 'hwav_ealt', 'hrcn_ealt', 'istm_ealt',\
                                   'lnds_ealt', 'ltng_ealt','rfld_ealt', 'swnd_ealt', 'trnd_ealt',\
-                                  'tsun_ealt', 'vlcn_ealt', 'wfir_ealt', 'wntw_ealt',])
+                                  'tsun_ealt', 'vlcn_ealt', 'wfir_ealt', 'wntw_ealt','risk_score'])
     y_test = test[target]
 
     return X_train, y_train, X_validate, y_validate, X_test, y_test

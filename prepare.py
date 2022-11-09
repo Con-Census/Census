@@ -293,16 +293,16 @@ def prep_fema(df):
               'ND','OH','OK','OR','PA','RI','SC', 'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
     
     # Create a columm that'll help with joining the two dataframes
-    #state_funding['stateabbrv'] = states
+    state_funding['stateabbrv'] = states
     
     # Drop $ and , to convert column type
-    #state_funding.funding = state_funding.funding.str.replace('$','', regex=True).replace(',','', regex=True)
+    state_funding.funding = state_funding.funding.str.replace('$','', regex=True).replace(',','', regex=True)
     
     # Make the funding an integer type
-    #state_funding.funding = state_funding.funding.astype(int)
+    state_funding.funding = state_funding.funding.astype(int)
     
     # Join dataframes
-    #df = df.merge(state_funding[['stateabbrv','funding']], how='right', on='stateabbrv')
+    df = df.merge(state_funding[['stateabbrv','funding']], how='right', on='stateabbrv')
     
     # State Revenue per person, narrow df down to states, dropping regions, and changing column type to integer
     sr = pd.read_csv('state_revenue.csv')
@@ -405,16 +405,23 @@ def prep_fema(df):
     tp_mid = (tp + mid)/2
     
     # Engineer a category for each county on where it falls in reference to "preparedness"
-    df['support_level'] = pd.cut(df.deficit, [btm, btm_mid, mid, tp_mid, tp], labels = ['bottom_tier',\
-                                                                                        'below_average',\
-                                                                                        'above_average',\
-                                                                                        'top_tier'])
+    
+    df['support_level'] = pd.cut(df.deficit, [btm, btm_mid, mid, tp_mid, tp], include_lowest=True,\
+                                 labels = ['bottom_tier',\
+                                           'below_average',\
+                                           'above_average',\
+                                           'top_tier'])
+    
+    # df['support_level'] = pd.qcut(df.deficit, 4, labels = ['bottom_tier',\
+    #                                                        'below_average',\
+    #                                                        'above_average',\
+    #                                                        'top_tier'])
     
     # Change column order
-    df = df[['full_state', 'state', 'county', 'stcofips', 'population', 'area', 'pop_density',
-             'state_funding', 'fema_per_county',
-             'risk_score','avln_ealt','cfld_ealt','cwav_ealt', 'drgt_ealt', 'erqk_ealt', 'hail_ealt', 'hwav_ealt',
-             'hrcn_ealt', 'istm_ealt','lnds_ealt', 'ltng_ealt', 'rfld_ealt', 'swnd_ealt', 'trnd_ealt', 'tsun_ealt',
+    df = df[['full_state', 'state', 'county', 'population', 'statepop', 'area', 'pop_density', 'funding',\
+             'revenue_per_person', 'state_funding', 'state_amount', 'fema_state_funding', 'fema_per_county',\
+             'risk_score','avln_ealt','cfld_ealt','cwav_ealt', 'drgt_ealt', 'erqk_ealt', 'hail_ealt', 'hwav_ealt',\
+             'hrcn_ealt', 'istm_ealt','lnds_ealt', 'ltng_ealt', 'rfld_ealt', 'swnd_ealt', 'trnd_ealt', 'tsun_ealt',\
              'vlcn_ealt','wfir_ealt', 'wntw_ealt', 'max_cost', 'county_funding', 'deficit', 'support_level']]
     
     return df    
