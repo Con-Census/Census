@@ -272,8 +272,12 @@ def prep_fema(df):
     df = df[df.columns.drop(list(df.filter(regex='spctl')))]
     # Expected Annual Loss
     df = df[df.columns.drop(list(df.filter(regex='eal_')))]
-    # Events are recorded over varyiong periods, so we'll only keep frequency
+    # Events are recorded over varyiong periods
     df = df[df.columns.drop(list(df.filter(regex='evnts')))]
+    # frequency
+    df = df[df.columns.drop(list(df.filter(regex='afreq')))]\
+    # Risk Scores
+    df = df[df.columns.drop(list(df.filter(regex='risks')))]
     
     # Sort alphabetically by state
     df = df.sort_values(by=['state','county'])
