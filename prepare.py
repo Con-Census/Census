@@ -218,12 +218,13 @@ def prepare_fema(df):
     
 def prep_fema(df):
     
-    '''Beginning with a dateframe that has 365 columns, removing columns with string ratings, separate values for various
-    things, and adding various columns to determine the deficit an individual county will have if a disaster would occur '''
+    '''Beginning with a dateframe with 365 columns, removing columns with string ratings, columns that have separate values for
+    various things that a disaster can affect, and adding various columns to determine the deficit an individual county will
+    have if a disaster would occur '''
     # loweercase column names
     df.columns = df.columns.str.lower()
     
-    # Drop columns for additional ID columns or version info
+    # Drop columns for additional ID columns or version info (keep stcofips as a geographic identifier)
     df.drop(columns=['nri_id', 'statefips', 'countytype', 'countyfips', 'buildvalue', 'agrivalue',
                      'nri_ver', 'oid_'], inplace=True)
     
@@ -302,9 +303,15 @@ def prep_fema(df):
     # State Revenue per person, narrow df down to states, dropping regions, and changing column type to integer
     sr = pd.read_csv('state_revenue.csv')
     sr = sr.iloc[4:75]
+    
+    # drop nulls
     sr.dropna(inplace=True)
+    
+    # Filter down columns and rename them
     sr = sr[['25-Aug-22','Unnamed: 23']]
     sr = sr.rename(columns={'Unnamed: 23': 'revenue_per_person', '25-Aug-22':'state'}).iloc[1:]
+    
+    # Drop non-state columns
     sr = sr.iloc[2:].drop(index=[16,24,31,40,54,60,67])
     
     # Create new column
@@ -328,12 +335,13 @@ def prep_fema(df):
     efunds = {'stateabbrv':['AL', 'AK','AZ','AR','CA','CO','CT','DE','D.C.','FL','GA', 'HI','ID','IL','IN','IA','KS','KY','LA',
                             'ME','MD', 'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK', 'OR',
                             'PA', 'RI','SC', 'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'],
-              'state_amount':[(56700 + 5287908 + 420000 + 500000),2000000, 8000000, 17569984, 1000000, 12500000, 0, 0, 0, 15284704,
-                        11062041, 0, 0, 0, (114456+119004+485000), 0, 1315138, 0, 1100000, 0, 0, 0, 0, 10000000, 20000000, 0,
-                        0,250000, 2000000, 0, 0, 0, 200000000, 22300000, 12292597, 7500000, 0, 0, 0, 250000, 0, 0, 4000000, 
-                        100000000, (11113142+104100+7093015), 2000000, 0, 77483000, 0, 711200, 500000]}
+              'state_amount':[(56700 + 5287908 + 420000 + 500000),2000000, 8000000, 17569984, 1000000, 12500000, 0, 0, 0, 
+                              15284704, 11062041, 0, 0, 0, (114456+119004+485000), 0, 1315138, 0, 1100000, 0, 0, 0, 0, 
+                              10000000, 20000000, 0, 0, 250000, 2000000, 0, 0, 0, 200000000, 22300000, 12292597, 7500000, 0, 0, 
+                              0, 250000, 0, 0, 4000000, 100000000, (11113142+104100+7093015), 2000000, 0, 77483000, 0, 
+                              711200, 500000]}
     
-    # Create a df
+    # Create a df from the data
     efunds = pd.DataFrame(efunds)
     
     # Merge
@@ -360,32 +368,26 @@ def prep_fema(df):
     # Fill NA's as most are areas where certain disasters will not strike
     df=df.fillna(0)
     
-    # Rename
+    # Rename columns
     df=df.rename(columns={'state':'full_state','stateabbrv':'state'})
     df.replace('D.C.','DC',inplace=True)
     
     # Create population density
     df['pop_density'] = df.population / df.area
     
-    
     # Engineer a category for each county on where it falls in reference to "preparedness"
     df['support_level'] = pd.cut(df.deficit, 4, labels = ['bottom tier', 'below average', 'above average', 'top tier'])
     
     # Change column order
-    df = df[['full_state', 'state', 'county', 'population','statepop', 'area', 'pop_density','funding',
-       'revenue_per_person', 'state_funding', 'state_amount', 'risk_score',
-       'avln_afreq', 'avln_ealt', 'avln_risks', 'cfld_afreq', 'cfld_ealt',
-       'cfld_risks', 'cwav_afreq', 'cwav_ealt', 'cwav_risks', 'drgt_afreq',
-       'drgt_ealt', 'drgt_risks', 'erqk_afreq', 'erqk_ealt', 'erqk_risks',
-       'hail_afreq', 'hail_ealt', 'hail_risks', 'hwav_afreq', 'hwav_ealt',
-       'hwav_risks', 'hrcn_afreq', 'hrcn_ealt', 'hrcn_risks', 'istm_afreq',
-       'istm_ealt', 'istm_risks', 'lnds_afreq', 'lnds_ealt', 'lnds_risks',
-       'ltng_afreq', 'ltng_ealt', 'ltng_risks', 'rfld_afreq', 'rfld_ealt',
-       'rfld_risks', 'swnd_afreq', 'swnd_ealt', 'swnd_risks', 'trnd_afreq',
-       'trnd_ealt', 'trnd_risks', 'tsun_afreq', 'tsun_ealt', 'tsun_risks',
-       'vlcn_afreq', 'vlcn_ealt', 'vlcn_risks', 'wfir_afreq', 'wfir_ealt',
-       'wfir_risks', 'wntw_afreq', 'wntw_ealt', 'wntw_risks', 'max_cost',
-       'county_funding', 'deficit', 'support_level']]
+    df = df[['full_state', 'state', 'county', 'population', 'statepop', 'area', 'pop_density', 'funding', 'revenue_per_person', 
+             'state_funding', 'state_amount', 'risk_score', 'avln_afreq', 'avln_ealt', 'avln_risks', 'cfld_afreq', 'cfld_ealt',
+             'cfld_risks', 'cwav_afreq', 'cwav_ealt', 'cwav_risks', 'drgt_afreq', 'drgt_ealt', 'drgt_risks', 'erqk_afreq',
+             'erqk_ealt', 'erqk_risks', 'hail_afreq', 'hail_ealt', 'hail_risks', 'hwav_afreq', 'hwav_ealt', 'hwav_risks',
+             'hrcn_afreq', 'hrcn_ealt', 'hrcn_risks', 'istm_afreq', 'istm_ealt', 'istm_risks', 'lnds_afreq', 'lnds_ealt',
+             'lnds_risks', 'ltng_afreq', 'ltng_ealt', 'ltng_risks', 'rfld_afreq', 'rfld_ealt', 'rfld_risks', 'swnd_afreq',
+             'swnd_ealt', 'swnd_risks', 'trnd_afreq', 'trnd_ealt', 'trnd_risks', 'tsun_afreq', 'tsun_ealt', 'tsun_risks',
+             'vlcn_afreq', 'vlcn_ealt', 'vlcn_risks', 'wfir_afreq', 'wfir_ealt', 'wfir_risks', 'wntw_afreq', 'wntw_ealt',
+             'wntw_risks', 'max_cost', 'county_funding', 'deficit', 'support_level']]
     
     return df    
     
