@@ -53,23 +53,59 @@ def train_validate_test(df, target):
     train, validate = train_test_split(train_validate, test_size=0.3, random_state=123)
 
     # split train into X (dataframe, drop target) & y (series, keep target only)
-    X_train = train.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'funding', 'drought_loss', 'hurricane_loss',
-                                  'storm_loss', 'area', 'population', 'support_value'])
+    X_train = train.drop(columns=[target,   'full_state', 'state', 'county', 'population','statepop',\
+                                  'area', 'funding', 'revenue_per_person', 'state_funding',\
+                                  'state_amount', 'risk_score', 'avln_afreq', 'avln_ealt', 'avln_risks',\
+                                  'cfld_afreq', 'cfld_ealt', 'cfld_risks', 'cwav_afreq', 'cwav_ealt',\
+                                  'cwav_risks', 'drgt_afreq', 'drgt_ealt', 'drgt_risks', 'erqk_afreq',\
+                                  'erqk_ealt', 'erqk_risks', 'hail_afreq', 'hail_ealt', 'hail_risks',\
+                                  'hwav_afreq', 'hwav_ealt', 'hwav_risks', 'hrcn_afreq', 'hrcn_ealt',\
+                                  'hrcn_risks', 'istm_afreq', 'istm_ealt', 'istm_risks', 'lnds_afreq',\
+                                  'lnds_ealt', 'lnds_risks', 'ltng_afreq', 'ltng_ealt', 'ltng_risks',\
+                                  'rfld_afreq', 'rfld_ealt', 'rfld_risks', 'swnd_afreq', 'swnd_ealt',\
+                                  'swnd_risks', 'trnd_afreq', 'trnd_ealt', 'trnd_risks', 'tsun_afreq',\
+                                  'tsun_ealt', 'tsun_risks', 'vlcn_afreq', 'vlcn_ealt', 'vlcn_risks',\
+                                  'wfir_afreq', 'wfir_ealt', 'wfir_risks', 'wntw_afreq', 'wntw_ealt',\
+                                  'wntw_risks'])
     y_train = train[target]
 
     # split validate into X (dataframe, drop target) & y (series, keep target only)
-    X_validate = validate.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'funding', 'drought_loss', 'hurricane_loss',
-                                  'storm_loss','area', 'population', 'support_value'])
+    X_validate = validate.drop(columns=[target, 'full_state', 'state', 'county', 'population','statepop',\
+                                  'area', 'funding', 'revenue_per_person', 'state_funding',\
+                                  'state_amount', 'risk_score', 'avln_afreq', 'avln_ealt', 'avln_risks',\
+                                  'cfld_afreq', 'cfld_ealt', 'cfld_risks', 'cwav_afreq', 'cwav_ealt',\
+                                  'cwav_risks', 'drgt_afreq', 'drgt_ealt', 'drgt_risks', 'erqk_afreq',\
+                                  'erqk_ealt', 'erqk_risks', 'hail_afreq', 'hail_ealt', 'hail_risks',\
+                                  'hwav_afreq', 'hwav_ealt', 'hwav_risks', 'hrcn_afreq', 'hrcn_ealt',\
+                                  'hrcn_risks', 'istm_afreq', 'istm_ealt', 'istm_risks', 'lnds_afreq',\
+                                  'lnds_ealt', 'lnds_risks', 'ltng_afreq', 'ltng_ealt', 'ltng_risks',\
+                                  'rfld_afreq', 'rfld_ealt', 'rfld_risks', 'swnd_afreq', 'swnd_ealt',\
+                                  'swnd_risks', 'trnd_afreq', 'trnd_ealt', 'trnd_risks', 'tsun_afreq',\
+                                  'tsun_ealt', 'tsun_risks', 'vlcn_afreq', 'vlcn_ealt', 'vlcn_risks',\
+                                  'wfir_afreq', 'wfir_ealt', 'wfir_risks', 'wntw_afreq', 'wntw_ealt',\
+                                  'wntw_risks'])
     y_validate = validate[target]
 
     # split test into X (dataframe, drop target) & y (series, keep target only)
-    X_test = test.drop(columns=[target, 'state', 'full_state', 'county', 'state_funding', 'funding', 'drought_loss', 'hurricane_loss',
-                                  'storm_loss', 'area', 'population', 'support_value'])
+    X_test = test.drop(columns=[target, 'full_state', 'state', 'county', 'population','statepop',\
+                                  'area', 'funding', 'revenue_per_person', 'state_funding',\
+                                  'state_amount', 'risk_score', 'avln_afreq', 'avln_ealt', 'avln_risks',\
+                                  'cfld_afreq', 'cfld_ealt', 'cfld_risks', 'cwav_afreq', 'cwav_ealt',\
+                                  'cwav_risks', 'drgt_afreq', 'drgt_ealt', 'drgt_risks', 'erqk_afreq',\
+                                  'erqk_ealt', 'erqk_risks', 'hail_afreq', 'hail_ealt', 'hail_risks',\
+                                  'hwav_afreq', 'hwav_ealt', 'hwav_risks', 'hrcn_afreq', 'hrcn_ealt',\
+                                  'hrcn_risks', 'istm_afreq', 'istm_ealt', 'istm_risks', 'lnds_afreq',\
+                                  'lnds_ealt', 'lnds_risks', 'ltng_afreq', 'ltng_ealt', 'ltng_risks',\
+                                  'rfld_afreq', 'rfld_ealt', 'rfld_risks', 'swnd_afreq', 'swnd_ealt',\
+                                  'swnd_risks', 'trnd_afreq', 'trnd_ealt', 'trnd_risks', 'tsun_afreq',\
+                                  'tsun_ealt', 'tsun_risks', 'vlcn_afreq', 'vlcn_ealt', 'vlcn_risks',\
+                                  'wfir_afreq', 'wfir_ealt', 'wfir_risks', 'wntw_afreq', 'wntw_ealt',\
+                                  'wntw_risks'])
     y_test = test[target]
 
     return X_train, y_train, X_validate, y_validate, X_test, y_test
 
-
+# 'state', 'full_state', 'county', 'state_funding', 'funding', 'drought_loss', 'hurricane_loss', 'storm_loss', 'area', 'population', 'support_value'
 
 def scale_data(X_train, X_validate, X_test):
     '''

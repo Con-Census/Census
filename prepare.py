@@ -323,7 +323,7 @@ def prep_fema(df):
     efunds = {'stateabbrv':['AL', 'AK','AZ','AR','CA','CO','CT','DE','D.C.','FL','GA', 'HI','ID','IL','IN','IA','KS','KY','LA',
                             'ME','MD', 'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK', 'OR',
                             'PA', 'RI','SC', 'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'],
-              'amount':[(56700 + 5287908 + 420000 + 500000),2000000, 8000000, 17569984, 1000000, 12500000, 0, 0, 0, 15284704,
+              'state_amount':[(56700 + 5287908 + 420000 + 500000),2000000, 8000000, 17569984, 1000000, 12500000, 0, 0, 0, 15284704,
                         11062041, 0, 0, 0, (114456+119004+485000), 0, 1315138, 0, 1100000, 0, 0, 0, 0, 10000000, 20000000, 0,
                         0,250000, 2000000, 0, 0, 0, 200000000, 22300000, 12292597, 7500000, 0, 0, 0, 250000, 0, 0, 4000000, 
                         100000000, (11113142+104100+7093015), 2000000, 0, 77483000, 0, 711200, 500000]}
@@ -347,7 +347,7 @@ def prep_fema(df):
      'tsun_ealt','vlcn_ealt','wfir_ealt','wntw_ealt']].max(axis=1)
     
     # How much a county would get when disaster strikes
-    df['county_funding'] = df.amount/df.statepop*df.population
+    df['county_funding'] = df.state_amount/df.statepop*df.population
     
     # Define if there is a deficit between the funding they receive and the cost of disaster
     df['deficit'] = (df.county_funding) - df.max_cost
@@ -366,7 +366,7 @@ def prep_fema(df):
     df['support_level'] = pd.cut(df.deficit, 4, labels = ['bottom tier', 'below average', 'above average', 'top tier'])
     
     df = df[['full_state', 'state', 'county', 'population','statepop', 'area', 'pop_density','funding',
-       'revenue_per_person', 'state_funding', 'amount', 'risk_score',
+       'revenue_per_person', 'state_funding', 'state_amount', 'risk_score',
        'avln_afreq', 'avln_ealt', 'avln_risks', 'cfld_afreq', 'cfld_ealt',
        'cfld_risks', 'cwav_afreq', 'cwav_ealt', 'cwav_risks', 'drgt_afreq',
        'drgt_ealt', 'drgt_risks', 'erqk_afreq', 'erqk_ealt', 'erqk_risks',
