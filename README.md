@@ -39,6 +39,13 @@ ___
 ***
 ## Data Dictionary
 
+|Target|Definition
+|:-------|:----------|
+|support_level|Classification of county based on available funding|
+
+|Feature|Definition|
+|:-------|:----------|
+
 |full_state  |State Name|
 |state   |State Abbreviation|
 |county  |County Name|
