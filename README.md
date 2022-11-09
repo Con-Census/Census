@@ -38,6 +38,7 @@ ___
 
 ***
 ## Data Dictionary
+<img width="334" alt="Screen Shot 2022-11-09 at 2 02 58 PM" src="https://user-images.githubusercontent.com/98612085/200929817-db0d31fe-64f9-4017-aa34-51f9ecd9c26f.png">
 
 |Target|Definition
 |:-------|:----------|
