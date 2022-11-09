@@ -329,7 +329,7 @@ def prep_fema(df):
     # sort states and reset index
     sr = sr.sort_values(by='stateabbrv').reset_index(drop=True)
     
-    # Merge dataframes
+    # Merge
     df = df.merge(sr, how='right', on='stateabbrv')
     
     # Create columns that captures the estimated tax money each county makes based on population
@@ -357,6 +357,18 @@ def prep_fema(df):
     
     # Merge
     df = df.merge(statepop, on='state', how='right')
+    
+    # FY22 FEMA Funding to states listed under "other" award. 
+    # https://www.usaspending.gov/search/?hash=68167b58af1378733e2e2fa03106dd49
+    fema_funding = {'stateabbrv':states,
+                    'fema_funding':[19.31, 0.0922, 3.63, 6.16, 6.24, 0.378, 27.23, 6.95, 0.124, 29.68,
+                                5.8, 4.55, 0.0001409, 1.77, 1.29, 0.367, 0.496, 18.01, 700.46, 0.212,
+                                11.96, 4.08, 1.73, 0.670, 11.59, 17.09, 4.94, 0.455, 0.346, 0.914,
+                                364.778, 0.204, 160.08, 19.7, 0.192, 3.28, 6.31, 0.371, 113.3, 1.64,
+                               1.58, 0.0916, 19.6, 30.77, 0.926, 0.135, 3.096, 31.26, 2.8, 0.462, 0.0003]}
+
+    # Another merge
+    df = df.merge(pd.DataFrame(fema_funding), on='stateabbrv', how='right')
     
     # Disaster that would cost the most
     df['max_cost'] = df[['drgt_ealt', 'hrcn_ealt', 'avln_ealt', 'cwav_ealt', 'erqk_ealt', 'hail_ealt', 
@@ -394,7 +406,7 @@ def prep_fema(df):
     
     # Change column order
     df = df[['full_state', 'state', 'county', 'population', 'statepop', 'area', 'pop_density', 'funding',\
-             'revenue_per_person', 'state_funding', 'state_amount', 'risk_score', 'avln_ealt', 'cfld_ealt',\
+             'revenue_per_person', 'state_funding', 'state_amount', 'fema_funding','risk_score', 'avln_ealt', 'cfld_ealt',\
              'cwav_ealt', 'drgt_ealt', 'erqk_ealt', 'hail_ealt', 'hwav_ealt','hrcn_ealt', 'istm_ealt',\
              'lnds_ealt', 'ltng_ealt', 'rfld_ealt', 'swnd_ealt', 'trnd_ealt', 'tsun_ealt', 'vlcn_ealt',\
              'wfir_ealt', 'wntw_ealt', 'max_cost', 'county_funding', 'deficit', 'support_level']]
