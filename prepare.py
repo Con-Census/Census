@@ -385,7 +385,7 @@ def prep_fema(df):
     df['county_funding'] = df.state_amount/df.statepop*df.population
     
     # Define if there is a deficit between the funding they receive and the cost of disaster
-    df['deficit'] = (df.county_funding) - df.max_cost
+    df['deficit'] = (df.county_funding+df.fema_per_county) - df.max_cost
     
     # Fill NA's as most are areas where certain disasters will not strike
     df=df.fillna(0)
