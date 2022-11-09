@@ -382,7 +382,7 @@ def prep_fema(df):
     #creating bins
     btm = df.deficit.min()
     mid = df.deficit.mean()
-    top = df.deficit.max()
+    tp = df.deficit.max()
     btm_mid = (btm + mid)/2
     tp_mid = (tp + mid)/2
     
@@ -394,7 +394,7 @@ def prep_fema(df):
     
     # Change column order
     df = df[['full_state', 'state', 'county', 'population', 'statepop', 'area', 'pop_density', 'funding',\
-             'revenue_per_person', 'state_funding', 'state_amount', 'avln_ealt', 'cfld_ealt',\
+             'revenue_per_person', 'state_funding', 'state_amount', 'risk_score', 'avln_ealt', 'cfld_ealt',\
              'cwav_ealt', 'drgt_ealt', 'erqk_ealt', 'hail_ealt', 'hwav_ealt','hrcn_ealt', 'istm_ealt',\
              'lnds_ealt', 'ltng_ealt', 'rfld_ealt', 'swnd_ealt', 'trnd_ealt', 'tsun_ealt', 'vlcn_ealt',\
              'wfir_ealt', 'wntw_ealt', 'max_cost', 'county_funding', 'deficit', 'support_level']]
