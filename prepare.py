@@ -272,12 +272,8 @@ def prep_fema(df):
     df = df[df.columns.drop(list(df.filter(regex='spctl')))]
     # Expected Annual Loss
     df = df[df.columns.drop(list(df.filter(regex='eal_')))]
-    # Events are recorded over varyiong periods
+    # Events are recorded over varyiong periods, so we'll only keep frequency
     df = df[df.columns.drop(list(df.filter(regex='evnts')))]
-    # Frequency
-    df = df[df.columns.drop(list(df.filter(regex='afreq')))]
-    # Risk score
-    df = df[df.columns.drop(list(df.filter(regex='risk')))]
     
     # Sort alphabetically by state
     df = df.sort_values(by=['state','county'])
@@ -379,15 +375,25 @@ def prep_fema(df):
     # Create population density
     df['pop_density'] = df.population / df.area
     
+    #creating bins
+    btm = df.deficit.min()
+    mid = df.deficit.mean()
+    top = df.deficit.max()
+    btm_mid = (btm + mid)/2
+    tp_mid = (tp + mid)/2
+    
     # Engineer a category for each county on where it falls in reference to "preparedness"
-    df['support_level'] = pd.cut(df.deficit, 4, labels = ['bottom tier', 'below average', 'above average', 'top tier'])
+    df['support_level'] = pd.cut(df.deficit, [btm, btm_mid, mid, tp_mid, tp], labels = ['bottom_tier',\
+                                                                                        'below_average',\
+                                                                                        'above_average',\
+                                                                                        'top_tier'])
     
     # Change column order
-    df = df[['full_state', 'state', 'county', 'stcofips', 'population', 'statepop', 'area', 'pop_density', 'funding',
-             'revenue_per_person', 'state_funding', 'state_amount', 'avln_ealt', 'cfld_ealt', 'cwav_ealt', 'drgt_ealt',
-             'erqk_ealt', 'hail_ealt', 'hwav_ealt', 'hrcn_ealt', 'istm_ealt', 'lnds_ealt','ltng_ealt', 'rfld_ealt',
-             'swnd_ealt', 'trnd_ealt', 'tsun_ealt',  'vlcn_ealt', 'wfir_ealt', 'wntw_ealt', 'max_cost', 
-             'county_funding', 'deficit', 'support_level']]
+    df = df[['full_state', 'state', 'county', 'population', 'statepop', 'area', 'pop_density', 'funding',\
+             'revenue_per_person', 'state_funding', 'state_amount', 'avln_ealt', 'cfld_ealt',\
+             'cwav_ealt', 'drgt_ealt', 'erqk_ealt', 'hail_ealt', 'hwav_ealt','hrcn_ealt', 'istm_ealt',\
+             'lnds_ealt', 'ltng_ealt', 'rfld_ealt', 'swnd_ealt', 'trnd_ealt', 'tsun_ealt', 'vlcn_ealt',\
+             'wfir_ealt', 'wntw_ealt', 'max_cost', 'county_funding', 'deficit', 'support_level']]
     
     return df    
     
