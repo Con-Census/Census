@@ -45,7 +45,6 @@ ___
 
 |Feature|Definition|
 |:-------|:----------|
-
 |full_state  |State Name|
 |state   |State Abbreviation|
 |county  |County Name|
