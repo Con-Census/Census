@@ -22,7 +22,7 @@ ___
 
 ## Goal
 
-- Our team aims to classify the readiness of individual communities based on data from FEMA, USDA, and state spending, to determine their ability to withstand, and respond to a variety of disasters. Our classification will identify those communities that are the most/least prepared and can influence future fund allocation as well as assist DHS’s prioritization when responding to these emergencies.
+- Within this project our team was able to classify the readiness of individual counties based on data from FEMA, USDA, and think-tanks to determine their ability to withstand, and respond to a variety of disasters. Our classification model identifies which communities are prepared for any given natural hazard and can influence future funding allocation, assist the Department of Homeland Security’s response efforts, as well as inform citizens on what their best options are as far as living in a county that provides the best level of disaster relief compared to other areas.
 - This project aims to create a Machine Learning model to predict which State in the U.S. has most support from the government.
 
 ***
@@ -91,9 +91,9 @@ ___
 
 ***
 ## Initial Questions
-- Whether the dense of the populatop matter
+- Whether the density of the population matters?
 - The cost of the disaster per region
-- The south region has higher risk than any other regions
+- How does the risk score provided by the NRI correlate with available funding within each county?
 
 ***
 # Recommendation, Conclusion, and Next Step
@@ -104,14 +104,15 @@ ___
 - The KNN is our best model in our training, so we used it in our test. The model achived 90% accuracy 
 
 ## Conclusion 
-- The initial data indicated that the New York and California have highest risk in the United States and studies found to back the findings.
-- The South region has most diversed cost versus pop_density
-- The South region has, as the author Cindy Ermus wrote in her book,"The Gulf South, and the Gulf Coast in particular, is bound together by much more than geography or the shared experience of risk and vulnerability to wind, water, erosion, and biological exchanges,” she writes. “More fundamentally, the environment has helped define the region’s identity and largely determined its history, its social fabric, and its economy.” We can assumed, based on this graph that south region has significant high risk compare to other regions
+- Funds available play a large role in determining risk level 
+- The south and west regions displayed the majority of areas with a funds deficit
+- Utilizing hypothesis testing we discovered that our metric for support level is better at determining risk level for funds allocation vs an actual risk score
+- We improved by 12% from baseline accuracy
 
 ## Next Step
-- Expand the scope of the data
-- Improvise the machine learning model
-- Would do a seperate studies regarding New York and California
+- Expand the scope of the data by merging all of the data from the NRI into our model
+- Improve the machine learning model by introducing the other four mechanisms of funding
+- Improve on the data collection provided by each government agency website 
 
 ***
 ## Steps to Reproduce
