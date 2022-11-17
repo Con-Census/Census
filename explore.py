@@ -81,10 +81,27 @@ def explore1(q1):
     q1['risk_bin'] = pd.qcut(q1.risk_score, 4, labels=['low', 'medium', 'high', 'extremely_high'])
     q1['pop_bin'] = pd.qcut(q1.pop_density, 4, labels=['low', 'medium', 'high', 'extremely_high'])
     # Use pointplot to determine the relationship between population and state funding
+    plt.figure(figsize=(14,7))
+    ax = plt.axes()
     sns.pointplot(data=q1, x="pop_bin", y="state_amount", dodge=True)
+    plt.xlabel('Population')
+    plt.ylabel('State Funding (Billions)')
+    plt.ticklabel_format(style='plain', axis='y')
+    ax.set_yticklabels(['0', '0', '1.0', '2.0', 
+                        '3.0', '4.0', '5.0', '6.0'])
+    ax.set_xticklabels(['Low', 'Medium', 'High', 'Extremely High'])
+    plt.grid()
     plt.show()
-    # Use pointplot to determine the relationship between risk level and state funding
+    plt.figure(figsize=(14,7))
+    ax = plt.axes()
     sns.pointplot(data=q1, x="risk_bin", y="state_amount", dodge=True)
+    plt.xlabel('Population')
+    plt.ylabel('Risk_Level')
+    plt.ticklabel_format(style='plain', axis='y')
+    ax.set_yticklabels(['0', '0', '1.0', '2.0', 
+                        '3.0', '4.0', '5.0', '6.0'])
+    ax.set_xticklabels(['Low', 'Medium', 'High', 'Extremely High'])
+    plt.grid()
     plt.show()
 
 
